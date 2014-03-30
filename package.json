@@ -1,6 +1,6 @@
 {
   "name": "language-lasso",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Support for the Lasso language in Atom",
   "activationEvents": [
     "language-lasso:check_syntax"
