@@ -1,7 +1,7 @@
 {
   "name": "language-lasso",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "Support for the Lasso language in Atom",
   "activationEvents": ["language-lasso:check_syntax"],
   "repository": "https://github.com/bfad/Atom-Lasso",
   "license": "Public Domain",
