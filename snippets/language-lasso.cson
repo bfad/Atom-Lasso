@@ -1,0 +1,49 @@
+'.source.lasso':
+  'column':
+    'prefix': 'column'
+    'body': 'column(`${1:name}`)'
+  'define':
+    'prefix': 'define'
+    'body': 'define $1 => $2{\n\t$0\n}'
+  'field':
+    'prefix': 'field'
+    'body': 'field(`${1:name}`)'
+  'if ... else':
+    'prefix': 'ife'
+    'body': 'if(${1:condition}) => {\n\t$2\nelse${3:(${4:condition})}\n\t$5\n}'
+  'if':
+    'prefix': 'if'
+    'body': 'if(${1:condition}) => {\n\t$0\n}'
+  'inline':
+    'prefix': 'inline'
+    'body': 'inline(${1:-inlineName=\'$2\', }-database=$3, -sql=$4${5:, -maxRecords=$6}) => {\n\t$0\n}'
+  'iterate':
+    'prefix': 'iterate'
+    'body': 'iterate(${1:name}, ${2:local(\'$3\')}) => {\n\t$0\n}'
+  'local() = ':
+    'prefix': 'local'
+    'body': 'local(${1:name}) = $2'
+  'local(=)':
+    'prefix': 'local'
+    'body': 'local(${1:name} = $2)'
+  'records':
+    'prefix': 'records'
+    'body': 'records${1:(-inlineName=\'$2\')} => {\n\t$0\n}'
+  'resultSet':
+    'prefix': 'resultset'
+    'body': 'resultSet(${1:Index}${2:, -inlineName=\'$3\'}) => {\n\t$0\n}'
+  'rows':
+    'prefix': 'rows'
+    'body': 'rows${1:(-inlineName=\'$2\')} => {\n\t$0\n}'
+  'var() = ':
+    'prefix': 'var'
+    'body': 'var(${1:name}) = $2'
+  'var(=)':
+    'prefix': 'var'
+    'body': 'var(${1:name} = $2)'
+  'web_request->param()':
+    'prefix': 'wp'
+    'body': 'web_request->param(`${1:name}`)'
+  'with clause of query expression':
+    'prefix': 'with'
+    'body': 'with ${1:elm} in ${2:sequence}'

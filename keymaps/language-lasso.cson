@@ -1,0 +1,2 @@
+'.editor':
+  'ctrl-c': 'language-lasso:check_syntax'
