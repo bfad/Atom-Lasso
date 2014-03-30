@@ -6,6 +6,17 @@ developing solutions in Lasso 9. It provides syntax highlighting, some snippets,
 and basic syntax checking.
 
 
+## Installation Using Package Control (Preferred)
+
+The Atom editor has a built-in package control system, and this package is
+registered with it. It is recommended you use this for installation:
+
+1. In Atom choose the "Preferences" menu option from the "Atom" menu
+1. In the resulting window, choose "Packages" from the left-hand navigation menu
+1. Search for "Lasso" or "Language Lasso"
+1. Click the "Install button" for the "Language Lasso" package
+
+
 ## Manual Installation on OS X
 
 To manually install the package, issue the following command in a terminal:
