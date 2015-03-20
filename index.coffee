@@ -1,6 +1,6 @@
 module.exports =
   activate: ->
-    atom.workspaceView.command "language-lasso:check_syntax", => @check_syntax()
+    atom.commands.add 'atom-workspace', "language-lasso:check_syntax", => @check_syntax()
 
   check_syntax: ->
     editor = atom.workspace.getActiveEditor()
