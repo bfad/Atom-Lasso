@@ -1,6 +1,6 @@
 {
   "name": "language-lasso",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Support for the Lasso language in Atom",
   "activationEvents": [
     "language-lasso:check_syntax"
@@ -8,7 +8,7 @@
   "repository": "https://github.com/bfad/Atom-Lasso",
   "license": "Public Domain",
   "engines": {
-    "atom": ">0.50.0"
+    "atom": ">0.140.0"
   },
   "dependencies": {}
 }
