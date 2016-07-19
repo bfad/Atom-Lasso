@@ -1,9 +1,9 @@
 module.exports =
   activate: ->
-    atom.commands.add 'atom-workspace', "language-lasso:check_syntax", => @check_syntax()
+    atom.commands.add 'atom-workspace', "language-lasso:check_syntax": => @check_syntax()
 
   check_syntax: ->
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
     editor.buffer.save()
     require("child_process").execFile('/usr/bin/lassoc', [editor.buffer.file.path, '-n', '-o', '/dev/null'],
       (error, stdout, stderr) ->
