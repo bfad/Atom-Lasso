@@ -6,11 +6,16 @@ module.exports =
     editor = atom.workspace.getActiveTextEditor()
     editor.buffer.save()
     fs = require 'fs'
+    path = require 'path'
     lassocPath = '/usr/bin/lassoc'
+    compilerOutput = '/dev/null'
+    if (process.platform == 'win32')
+        lassocPath = path.join(process.env.LASSO9_HOME, 'LassoExecutables', 'lassoc.exe')
+        compilerOutput = path.join(process.env.TMP, 'atom-language-lasso-compiler-output')
     if !(fs.existsSync(lassocPath))
         alert('Lasso does not appear to be installed on this system; cannot validate syntax')
     else
-        require("child_process").execFile(lassocPath, [editor.buffer.file.path, '-n', '-o', '/dev/null'],
+        require("child_process").execFile(lassocPath, [editor.buffer.file.path, '-n', '-o', compilerOutput],
           (error, stdout, stderr) ->
             if(stderr and stderr.length > 0)
               parsed = stderr.match(/line: (\d+), col: (\d+)\s*$/)
