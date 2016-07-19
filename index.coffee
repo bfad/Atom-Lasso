@@ -4,6 +4,9 @@ module.exports =
 
   check_syntax: ->
     editor = atom.workspace.getActiveTextEditor()
+    if !(editor.buffer.file?.path?.length > 0)
+        alert('Current file must be saved somewhere before checking its syntax')
+        return
     editor.buffer.save()
     fs = require 'fs'
     path = require 'path'
