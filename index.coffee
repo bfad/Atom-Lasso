@@ -1,20 +1,33 @@
 module.exports =
   activate: ->
-    atom.commands.add 'atom-workspace', "language-lasso:check_syntax", => @check_syntax()
+    atom.commands.add 'atom-workspace', "language-lasso:check_syntax": => @check_syntax()
 
   check_syntax: ->
-    editor = atom.workspace.getActiveEditor()
+    editor = atom.workspace.getActiveTextEditor()
+    if !(editor.buffer.file?.path?.length > 0)
+        alert('Current file must be saved somewhere before checking its syntax')
+        return
     editor.buffer.save()
-    require("child_process").execFile('/usr/bin/lassoc', [editor.buffer.file.path, '-n', '-o', '/dev/null'],
-      (error, stdout, stderr) ->
-        if(stderr and stderr.length > 0)
-          parsed = stderr.match(/line: (\d+), col: (\d+)\s*$/)
-          if(parsed)
-            row    = parseInt(parsed[1]) - 1
-            col    = parseInt(parsed[2]) - 1
-            editor.setCursorBufferPosition([row, col])
+    fs = require 'fs'
+    path = require 'path'
+    lassocPath = '/usr/bin/lassoc'
+    compilerOutput = '/dev/null'
+    if (process.platform == 'win32')
+        lassocPath = path.join(process.env.LASSO9_HOME, 'LassoExecutables', 'lassoc.exe')
+        compilerOutput = path.join(process.env.TMP, 'atom-language-lasso-compiler-output')
+    if !(fs.existsSync(lassocPath))
+        alert('Lasso does not appear to be installed on this system; cannot validate syntax')
+    else
+        require("child_process").execFile(lassocPath, [editor.buffer.file.path, '-n', '-o', compilerOutput],
+          (error, stdout, stderr) ->
+            if(stderr and stderr.length > 0)
+              parsed = stderr.match(/line: (\d+), col: (\d+)\s*$/)
+              if(parsed)
+                row    = parseInt(parsed[1]) - 1
+                col    = parseInt(parsed[2]) - 1
+                editor.setCursorBufferPosition([row, col])
 
-          alert(stderr)
-        else
-          alert('No problems found')
-    )
+              alert(stderr)
+            else
+              alert('No problems found')
+        )
